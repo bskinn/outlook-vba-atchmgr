@@ -1,7 +1,26 @@
 Attribute VB_Name = "AtchHandling"
+
+' # ------------------------------------------------------------------------------
+' # Name:        AtchHandling.bas
+' # Purpose:     Worker functions for "Attachment Manager" Outlook VBA Add-In
+' #
+' # Author:      Brian Skinn
+' #                bskinn@alum.mit.edu
+' #
+' # Created:     18 Jun 2017
+' # Copyright:   (c) Brian Skinn 2017
+' # License:     The MIT License; see "LICENSE.txt" for full license terms
+' #                   and contributor agreement.
+' #
+' #       http://www.github.com/bskinn/outlook-vba-atchmgr
+' #
+' # ------------------------------------------------------------------------------
+
 Option Explicit
 
 Sub EditForAtchAnnot()
+    ' Routine for close/reopen and initial "[" insertion into messages to be annotated
+    '  manually.
     Dim insp As Inspector, wdEd As Word.Document
     Dim itm As Object
     
@@ -30,12 +49,9 @@ Sub EditForAtchAnnot()
 End Sub
 
 Public Sub ReattachAttachments()
-    ' Will be better done by collecting all (re)attach-able files and presenting in a checkbox-enabled
+    ' Collects info for all (re)attach-able files and presents in a checkbox-enabled
     '  UserForm, permitting user to select which ones to (re)attach and whether or not to retain the
     '  out-of-message copies of any that were originally macro-detached
-    '
-    ' Macro in present form will reattach all linked, locally-accessible files, including any that were
-    '  linked in the original text of the message.  This may not be the desired behavior.
     
     Dim wd As Word.Document, wdRg As Word.Range
     Dim fs As FileSystemObject

@@ -7,6 +7,23 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
+' # ------------------------------------------------------------------------------
+' # Name:        LinkedFile.cls
+' # Purpose:     Class containing information on linked reattachable files
+' #
+' # Author:      Brian Skinn
+' #                bskinn@alum.mit.edu
+' #
+' # Created:     18 Jun 2017
+' # Copyright:   (c) Brian Skinn 2017
+' # License:     The MIT License; see "LICENSE.txt" for full license terms
+' #                   and contributor agreement.
+' #
+' #       http://www.github.com/bskinn/outlook-vba-atchmgr
+' #
+' # ------------------------------------------------------------------------------
+
 Option Explicit
 
 Private hashTagged As Boolean
