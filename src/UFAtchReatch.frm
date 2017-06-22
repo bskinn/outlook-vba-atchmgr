@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 ' # ------------------------------------------------------------------------------
 ' # Name:        UFAtchReatch.frm
 ' # Purpose:     Custom form, handling selection of files to re-attach
@@ -69,9 +70,10 @@ Private Sub BtnDoReattach_Click()
             
             ' If was a detached link, cull the paragraph
             If lf.isHashed Then
-                ' If not a draft-in-progress, must restore edit mode
+                ' If not a draft-in-progress and running Office 2013, must restore edit mode
                 If Not mi.Parent.EntryID = Session.GetDefaultFolder(olFolderDrafts).EntryID And Not _
-                                    mi.Parent.EntryID = Session.GetDefaultFolder(olFolderOutbox).EntryID Then
+                                mi.Parent.EntryID = Session.GetDefaultFolder(olFolderOutbox).EntryID And Not _
+                                Left(Application.Version, 2) = "15" Then
                     ' Message is not a draft-in-progress and must be reset to edit mode
                     Call mi.GetInspector.CommandBars.ExecuteMso("EditMessage")
                 End If
