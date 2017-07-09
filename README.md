@@ -12,3 +12,6 @@ Copyright (c) Brian Skinn 2017
 License: The MIT License  
 See [`LICENSE.txt`](https://github.com/bskinn/outlook-vba-atchmgr/blob/master/LICENSE.txt)
 for full license terms and contributor agreement.
+
+*Attachment Manager is third-party software, and is neither affiliated with, nor authorized,
+sponsored, or approved by, Microsoft Corporation.*
