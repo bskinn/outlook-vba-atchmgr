@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 ' # ------------------------------------------------------------------------------
 ' # Name:        UFAtchReatch.frm
 ' # Purpose:     Custom form, handling selection of files to re-attach
@@ -151,28 +152,45 @@ Private Sub LBxFileList_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 End Sub
 
 Private Sub LBxFileList_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Dim clickIndex As Long, chgIndex As Long
+    
+    ' Initialize the clickIndex to a flag value
+    clickIndex = -1
+    
     If Button = 2 Then  ' Right mouse button
-        'MsgBox Y
+        ' Check which row of the listbox was right-clicked
+        If Y >= 0.75 And Y <= 11.25 Then
+            clickIndex = 0
+        ElseIf Y >= 14.25 And Y <= 24.75 Then
+            clickIndex = 1
+        ElseIf Y >= 26.25 And Y <= 37.55 Then
+            clickIndex = 2
+        ElseIf Y >= 39 And Y <= 51 Then
+            clickIndex = 3
+        ElseIf Y >= 52.55 And Y <= 63.05 Then
+            clickIndex = 4
+        ElseIf Y >= 64.5 And Y <= 75.8 Then
+            clickIndex = 5
+        ElseIf Y >= 78.05 And Y <= 87.8 Then
+            clickIndex = 6
+        ElseIf Y >= 90.05 And Y <= 100.55 Then
+            clickIndex = 7
+        End If
+        
+        ' If the click fell through, just exit the sub
+        If clickIndex = -1 Then Exit Sub
+        
+        ' Toggle the 'delete' Yes/No value if the click was on an existing
+        '  element of the list
         With LBxFileList
-            If Y >= 0.75 And Y <= 11.25 Then
-                .List(0 + .TopIndex, 1) = swapYesNo(.List(0 + .TopIndex, 1))
-            ElseIf Y >= 14.25 And Y <= 24.75 Then
-                .List(1 + .TopIndex, 1) = swapYesNo(.List(1 + .TopIndex, 1))
-            ElseIf Y >= 26.25 And Y <= 37.55 Then
-                .List(2 + .TopIndex, 1) = swapYesNo(.List(2 + .TopIndex, 1))
-            ElseIf Y >= 39 And Y <= 51 Then
-                .List(3 + .TopIndex, 1) = swapYesNo(.List(3 + .TopIndex, 1))
-            ElseIf Y >= 52.55 And Y <= 63.05 Then
-                .List(4 + .TopIndex, 1) = swapYesNo(.List(4 + .TopIndex, 1))
-            ElseIf Y >= 64.5 And Y <= 75.8 Then
-                .List(5 + .TopIndex, 1) = swapYesNo(.List(5 + .TopIndex, 1))
-            ElseIf Y >= 78.05 And Y <= 87.8 Then
-                .List(6 + .TopIndex, 1) = swapYesNo(.List(6 + .TopIndex, 1))
-            ElseIf Y >= 90.05 And Y <= 100.55 Then
-                .List(7 + .TopIndex, 1) = swapYesNo(.List(7 + .TopIndex, 1))
+            chgIndex = clickIndex + .TopIndex
+            If chgIndex < .ListCount Then
+                .List(chgIndex, 1) = swapYesNo(.List(chgIndex, 1))
             End If
         End With
+        
     End If
+    
 End Sub
 
 Private Sub UserForm_Activate()
