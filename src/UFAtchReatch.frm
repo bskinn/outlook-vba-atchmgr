@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 
 
 
+
 ' # ------------------------------------------------------------------------------
 ' # Name:        UFAtchReatch.frm
 ' # Purpose:     Custom form, handling selection of files to re-attach
@@ -76,7 +77,11 @@ Private Sub BtnDoReattach_Click()
                                 mi.Parent.EntryID = Session.GetDefaultFolder(olFolderOutbox).EntryID And Not _
                                 Left(Application.Version, 2) = "15" Then
                     ' Message is not a draft-in-progress and must be reset to edit mode
-                    Call mi.GetInspector.CommandBars.ExecuteMso("EditMessage")
+                    ' Sometimes the move into edit mode can fail, though, so enclose
+                    ' with error trap that discards any errors
+                    On Error Resume Next
+                        Call mi.GetInspector.CommandBars.ExecuteMso("EditMessage")
+                    Err.Clear: On Error GoTo 0
                 End If
                 
                 ' Reattach the editor
