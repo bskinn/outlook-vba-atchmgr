@@ -320,7 +320,9 @@ Public Sub tagTextIntoEmail(itm As Object, atchName As String, saveName As Strin
         Call .Close(olSave)
         .Display
         Call .GetInspector.CommandBars.ExecuteMso("EditMessage")  ' Activate edit mode (presumes valid)
-        Call .GetInspector.CommandBars.ExecuteMso("MessageFormatHtml")  ' Set to HTML mode
+        On Error Resume Next  ' Ignore any error on this formate change attempt
+            Call .GetInspector.CommandBars.ExecuteMso("MessageFormatHtml")  ' Set to HTML mode
+        Err.Clear: On Error GoTo 0
     End With
     
     ' Attach Word Document for editing
